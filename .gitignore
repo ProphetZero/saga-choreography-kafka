@@ -1,0 +1,25 @@
+# Gradle files
+.gradle/
+**/build/
+build/
+
+# IntelliJ IDEA
+.idea/
+**/out/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
