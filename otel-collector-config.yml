@@ -1,0 +1,34 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  # Export traces to Zipkin
+  zipkin:
+    endpoint: "http://zipkin:9411/api/v2/spans"
+    
+  # Expose metrics so Prometheus can scrape them
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+
+  # Print out the traces/metrics to the console (good for debugging)
+  debug:
+    verbosity: detailed
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [zipkin, debug]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus, debug]
